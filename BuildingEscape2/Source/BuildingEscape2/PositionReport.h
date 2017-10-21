@@ -2,19 +2,15 @@
 
 #pragma once
 
-
 #include "CoreMinimal.h"
-
-#include "Engine/World.h" //TODO REMOVE THIS, only for autocompleto
+#include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "Components/ActorComponent.h"
 #include "PositionReport.generated.h"
 
 
-
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDING_ESCAPE_API UPositionReport : public UActorComponent
+class BUILDINGESCAPE2_API UPositionReport : public UActorComponent
 {
 	GENERATED_BODY()
 
