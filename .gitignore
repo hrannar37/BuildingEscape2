@@ -1,0 +1,20 @@
+# Unreal Generated files
+
+*/Binaries
+*/Build
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+*.suo
+
+BuildingEscape/Content/StarterContent
+!BuildingEscape/Content/StarterContent/Props
+
+# VS Generated files
+*.vc.db
+*.vc.opendb
+*.VC.db-shm
+*.VC.db-wal
+*.icph
+
+*.ipch
