@@ -7,8 +7,8 @@
 */Saved
 *.suo
 
-BuildingEscape/Content/StarterContent
-!BuildingEscape/Content/StarterContent/Props
+BuildingEscape2/Content/StarterContent
+!BuildingEscape2/Content/StarterContent/Props
 
 # VS Generated files
 *.vc.db
