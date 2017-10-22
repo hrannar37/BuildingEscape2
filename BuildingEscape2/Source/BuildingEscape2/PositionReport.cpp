@@ -19,8 +19,8 @@ void UPositionReport::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Position report reporting for duty, sir!"));
+	FString ObjectName = GetOwner()->GetName(); //retrieves an FString
+	UE_LOG(LogTemp, Warning, TEXT("Position report for %s"), *ObjectName); //remember *dereference pointer
 	// ...
 	
 }
