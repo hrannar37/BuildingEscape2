@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-//#include "Engine/World.h" //TODO Remove once the code is finished
+#include "Engine/World.h" //TODO Remove once the code is finished
+#include "Engine/TriggerVolume.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "FirstPuzzleMovingStairs.generated.h"
@@ -18,17 +19,26 @@ public:
 	// Sets default values for this component's properties
 	UFirstPuzzleMovingStairs();
 	
+	FVector InitialPosition;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	void MoveStairsDown();
+	void MoveStairsDown(FVector);
+	void ResetStairs(FVector);
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-private:
-	FVector InitialPosition = GetOwner()->GetActorLocation();
 	
+private:
+
+	UPROPERTY(EditAnywhere)
+		ATriggerVolume* PressurePlate = nullptr;
+	UPROPERTY(EditAnywhere)
+		AActor* Key = nullptr;
+
+
+	AActor* Player = nullptr;
+
 };
