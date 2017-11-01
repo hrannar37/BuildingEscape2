@@ -9,6 +9,7 @@
 #include "GameFramework/Actor.h"
 #include "FirstPuzzleMovingStairs.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStairEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE2_API UFirstPuzzleMovingStairs : public UActorComponent
@@ -18,14 +19,15 @@ class BUILDINGESCAPE2_API UFirstPuzzleMovingStairs : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UFirstPuzzleMovingStairs();
-	
-	FVector InitialPosition;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	void MoveStairsDown(FVector);
-	void ResetStairs(FVector);
+
+	UPROPERTY(BlueprintAssignable)
+		FStairEvent OnUpRequest;
+	UPROPERTY(BlueprintAssignable)
+		FStairEvent OnDownRequest;
 
 public:	
 	// Called every frame
