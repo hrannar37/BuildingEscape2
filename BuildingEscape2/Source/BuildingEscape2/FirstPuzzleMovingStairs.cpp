@@ -20,8 +20,6 @@ void UFirstPuzzleMovingStairs::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	InitialPosition = GetOwner()->GetActorLocation();
-
 	if (!PressurePlate)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Pressure Plate is not defined"))
@@ -40,23 +38,12 @@ void UFirstPuzzleMovingStairs::TickComponent(float DeltaTime, ELevelTick TickTyp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!PressurePlate) { return; }
 	if (PressurePlate->IsOverlappingActor(Key))
 	{
-		ResetStairs(InitialPosition);
+		OnUpRequest.Broadcast();
 	}
-	else { MoveStairsDown(InitialPosition); };
-}
-
-void UFirstPuzzleMovingStairs::MoveStairsDown(FVector IP)
-{
-	FVector Solution = IP;
-	Solution.Z = -35.0f;
-	GetOwner()->SetActorLocation(Solution);
-}
-
-void UFirstPuzzleMovingStairs::ResetStairs(FVector IP)
-{
-	GetOwner()->SetActorLocation(IP);
+	else { OnDownRequest.Broadcast(); }
 }
 
 

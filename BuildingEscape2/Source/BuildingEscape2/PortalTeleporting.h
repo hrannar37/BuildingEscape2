@@ -4,43 +4,34 @@
 
 #include "CoreMinimal.h"
 #include "Engine/World.h" //TODO Remove once the code is finished
-#include "Engine/TriggerVolume.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
-#include "FirstPuzzleMovingStairs.generated.h"
+#include "PortalTeleporting.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStairEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class BUILDINGESCAPE2_API UFirstPuzzleMovingStairs : public UActorComponent
+class BUILDINGESCAPE2_API UPortalTeleporting : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UFirstPuzzleMovingStairs();
+	UPortalTeleporting();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	UPROPERTY(BlueprintAssignable)
-		FStairEvent OnUpRequest;
-	UPROPERTY(BlueprintAssignable)
-		FStairEvent OnDownRequest;
+	void Teleporting();
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+
 private:
 
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate = nullptr;
-	UPROPERTY(EditAnywhere)
-		AActor* Key = nullptr;
+		AActor* PortalOut = nullptr;
 
-
-	AActor* Player = nullptr;
-
+	ACharacter* Player = nullptr;
 };
