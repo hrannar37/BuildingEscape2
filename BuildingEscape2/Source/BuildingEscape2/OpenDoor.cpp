@@ -18,7 +18,9 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//ActorThatOpens is defined as editableanywhere, but we need to define it at runtime.
+	//search top down, find from the world at runtime, the fpscontroller and from there get the pawn.
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 	
 	// ...
 	
