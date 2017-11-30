@@ -21,7 +21,7 @@ void UOpenDoor::BeginPlay()
 	//ActorThatOpens is defined as editableanywhere, but we need to define it at runtime.
 	//search top down, find from the world at runtime, the fpscontroller and from there get the pawn.
 	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
-	
+	Owner = GetOwner();
 	// ...
 	
 }
@@ -29,12 +29,18 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::OpenDoor()
 {
 	//Find Owning actor
-	AActor* Owner = GetOwner();
+	
 	//create rotator
-	FRotator NewRotation = FRotator(0.0f, 90.0f, 0.0f);//pitch, yaw, roll.
+
 													   //set door rotation
-	Owner->SetActorRotation(NewRotation);
+	Owner->SetActorRotation(FRotator(0.0f, OpenAngle, 0.0f));//pitch, yaw, roll.
 }
+
+void UOpenDoor::CloseDoor()
+{
+	Owner->SetActorRotation(FRotator(0.0f, 0.0f, 0.0f));
+}
+
 
 
 // Called every frame
@@ -45,11 +51,18 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	// ...
 	//poll trigger volume
 	//if the ActorThatOpens is in the volume
-	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
-	{
-		OpenDoor();
-
-	}
+		if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+		{
+			OpenDoor();
+			LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		}
 	
+		if (GetWorld()->GetTimeSeconds() > (LastDoorOpenTime + DoorCloseDelay)) {
+			CloseDoor();
+
+		}
+	
+
+	//check if it's time to close the door
 }
 
