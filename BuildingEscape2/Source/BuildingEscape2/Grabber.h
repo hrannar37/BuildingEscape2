@@ -31,9 +31,11 @@ public:
 
 		
 private:
-	float reach = 100.f;
+	
 	//how far we can reach in cm
+	UPROPERTY(EditAnywhere) 
 	float Reach = 100.f;
+
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
 
